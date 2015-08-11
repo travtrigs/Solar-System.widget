@@ -8,23 +8,10 @@ Installation:
 
 Customization:
 
-1. Moving widget
-  a. Open index.coffee
-  b. Find (style:""")
-  c. There are six "#REPOSITION" comments nearby.
-  d. Edit "top" and "left" inside the first two to move all of the planets.
-  e. Edit "top" and "left" inside the middle two to move the sun.
-  f. Edit "top" and "left" inside the last two to move the asteroid belt.
-  g. Save and close
-
-2. Adjusting size
-  a. Open index.coffee
-  b. Find (style:""")
-  c. Edit the "height" property under any "planetPos" id to increase size of respective element
-  d. If you edit any "height" properties, you must also edit "top:" and "left:" to each be half of the "height" value
-
-3. Adjusting scale
-  a. Open index.coffee
-  b. Find "update: (output, domEl) ->"
-  c. Adjust "scaleOuter" to change scale of outer four planets (Jupiter, Saturn, Uranus, and Neptune
-  d. Adjust "scale" to change scale of all eight planets
+1. Open index.coffee (TextEdit will work)
+2. The first 50 or so lines contain all customizable values
+3. Commented lines describe each value and their default setting
+4. Adjust what you please
+5. Make sure to preserve the "#Default" lines so you can reset things in case you make a mistake!
+6. Editing anything under the "DO NOT edit anything below this unless you know what you're doing!!!" line most likely will break the widget, so DO NOT mess around down there unless you know what you're doing!!!
+7. You can add your own images for the planets. Just add your desired picture to the solar-system.widget folder and change the name to overwrite whatever image you'd like to replace
