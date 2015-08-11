@@ -1,148 +1,114 @@
 #CHANGE "USER" TO YOUR USERNAME/HOMEFOLDER!!!
 command: "cd '/Users/USER/Library/Application\ Support/Übersicht/widgets/solar-system.widget/' && ./script.sh"
 
+#Sets refresh rate in milliseconds
+#Default = 86400000 (1 day)
 refreshFrequency: 86400000
 
+#Sets scale of sun and planets
+#Default = 1
+scale: 1
+
+#Sets scale of asteroids
+#Default = 90
+scaleAsteroids: 1
+
+#Sets scale of Mercury, Venus, Earth, and Mars
+#Default = 23
+scaleInner: 23
+
+#Sets scale of Jupiter, Saturn, Uranus, and Neptune
+#Default = 10
+scaleOuter: 10
+
+#Sets size of sun and planets globally
+#Default = 1
+sizeScale: 1
+
+#Sets size of sun and planets individually
+#Default for all = 5
+sizes:
+  sun: 5
+  mercury: 5
+  venus: 5
+  earth: 5
+  mars: 5
+  jupiter: 5
+  saturn: 5
+  uranus: 5
+  neptune: 5
+
+style:"""
+  //Sets position of widget in pixels
+  position: fixed
+  top: 300px
+  left: 300px
+
+  //////////////////////////////////////////////////////////////////////
+  //DO NOT edit anything below this unless you know what you're doing!!!
+  //////////////////////////////////////////////////////////////////////
+
+  #sun
+    position: absolute
+    transform: translate(-50%,-50%)
+  #asteroids
+    position: absolute
+    transform: translate(-50%,-50%)
+  #mercury
+    position: absolute
+    transform: translate(-50%,-50%)
+  #venus
+    position: absolute
+    transform: translate(-50%,-50%)
+  #earth
+    position: absolute
+    transform: translate(-50%,-50%)    
+  #mars
+    position: absolute
+    transform: translate(-50%,-50%)
+  #jupiter
+    position: absolute
+    transform: translate(-50%,-50%)
+  #saturn
+    position: absolute
+    transform: translate(-50%,-50%)
+  #uranus
+    position: absolute
+    transform: translate(-50%,-50%)
+  #neptune
+    position: absolute
+    transform: translate(-50%,-50%)
+"""
+
 render: ->"""
-<div id="sunPos"><img id="sun" src="solar-system.widget/Sun.png"/></div>
-<div id="asteroidsPos"><img id="asteroids" src="solar-system.widget/Asteroids.png"/></div>
-<div id="mercuryPos"><img id="mercury" src="solar-system.widget/Mercury.png"/></div>
-<div id="venusPos"><img id="venus" src="solar-system.widget/Venus.png"/></div>
-<div id="earthPos"><img id="earth" src="solar-system.widget/Earth.png"/></div>
-<div id="marsPos"><img id="mars" src="solar-system.widget/Mars.png"/></div>
-<div id="jupiterPos"><img id="jupiter" src="solar-system.widget/Jupiter.png"/></div>
-<div id="saturnPos"><img id="saturn" src="solar-system.widget/Saturn.png"/></div>
-<div id="uranusPos"><img id="uranus" src="solar-system.widget/Uranus.png"/></div>
-<div id="neptunePos"><img id="neptune" src="solar-system.widget/Neptune.png"/></div>
+<img id="sun" src="solar-system.widget/Sun.png"/>
+<img id="asteroids" src="solar-system.widget/Asteroids.png"/>
+<img id="mercury" src="solar-system.widget/Mercury.png"/>
+<img id="venus" src="solar-system.widget/Venus.png"/>
+<img id="earth" src="solar-system.widget/Earth.png"/>
+<img id="mars" src="solar-system.widget/Mars.png"/>
+<img id="jupiter" src="solar-system.widget/Jupiter.png"/>
+<img id="saturn" src="solar-system.widget/Saturn.png"/>
+<img id="uranus" src="solar-system.widget/Uranus.png"/>
+<img id="neptune" src="solar-system.widget/Neptune.png"/>
 """
 
 update: (output, domEl) ->
-  #Adjust this to change the scale of the outer 4 planets (Jupiter, Saturn, Uranus, Neptune)
-  scaleOuter = .45
-
-  #Adjust this to change the scale of all planets
-  scale = 23
+  planets = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']
+  asteroids = 'asteroids'  
 
   rows = output.split("\n")
-  x = [8]
-  y = [8]
   for row, i in rows
-    x[i] = row.split(" ")[0]
-    y[i] = row.split(" ")[1]
+    x = row.split(" ")[0];  y = row.split(" ")[1]
+    if i < 4
+      x *= @scaleInner; y *= -@scaleInner
+    else
+      x *= @scaleOuter; y *= -@scaleOuter
 
-  for i in [4,5,6,7]
-    x[i] = x[i] * scaleOuter
-    y[i] = y[i] * scaleOuter
+    $("##{planets[i]}").css top: "#{y*@scale}px"
+    $("##{planets[i]}").css left: "#{x*@scale}px"
 
-  @planets =
-    mercuryPos: 0
-    venusPos: 1
-    earthPos: 2
-    marsPos: 3
-    jupiterPos: 4
-    saturnPos: 5
-    uranusPos: 6
-    neptunePos: 7
+  for element, size of @sizes
+    $("##{element}").css height: "#{size}px"
 
-  for planet, i of @planets
-    $("##{planet}").css transform: "translate(#{x[i]*scale}px,#{-y[i]*scale}px)"
-
-    #REPOSITION
-    $("##{planet}").css top: "400px"
-    $("##{planet}").css left: "400px"
-    #REPOSITION
-
-style:"""
-  //Adjust any "height" property to increase size of respective element
-  //Make sure corresponding "top:" and "left:" properties are half of what you set for height
-
-  #sunPos
-    position: fixed
-
-    //REPOSITION
-    top: 400px
-    left: 400px
-    //REPOSITION
-  #sun
-    position: absolute
-    top: -3px
-    left: -3px
-    height: 6px
-
-  #asteroidsPos
-    position: fixed
-    
-    //REPOSITION
-    top: 400px
-    left: 400px
-    //REPOSITION
-  #asteroids
-    position: absolute
-    top: -45px
-    left: -45px
-    height: 90px
-
-  #mercuryPos
-    position: fixed
-  #mercury
-    position: absolute
-    top: -3px
-    left: -3px
-    height: 6px
-
-  #venusPos
-    position: fixed
-  #venus
-    position: absolute
-    top: -3px
-    left: -3px
-    height: 6px
-
-  #earthPos
-    position: fixed
-  #earth
-    position: absolute
-    top: -3px
-    left: -3px
-    height: 6px
-    
-  #marsPos
-    position: fixed
-  #mars
-    position: absolute
-    left: -3px
-    top: -3px
-    height: 6px
-
-  #jupiterPos
-    position: fixed
-  #jupiter
-    position: absolute
-    left: -3px
-    top: -3px
-    height: 6px
-
-  #saturnPos
-    position: fixed
-  #saturn
-    position: absolute
-    left: -3px
-    top: -3px
-    height: 6px
-
-  #uranusPos
-    position: fixed
-  #uranus
-    position: absolute
-    left: -3px
-    top: -3px
-    height: 6px
-
-  #neptunePos
-    position: fixed
-  #neptune
-    position: absolute
-    left: -3px
-    top: -3px
-    height: 6px
-"""
+  $("##{asteroids}").css height: "#{@scaleAsteroids*90}px"
