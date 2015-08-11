@@ -10,7 +10,7 @@ refreshFrequency: 86400000
 scale: 1
 
 #Sets scale of asteroids
-#Default = 90
+#Default = 1
 scaleAsteroids: 1
 
 #Sets scale of Mercury, Venus, Earth, and Mars
