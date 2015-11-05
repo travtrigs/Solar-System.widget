@@ -1,11 +1,3 @@
-Installation:
-
-1. Move solar-system.widget to your widgets folder
-2. Open index.coffee (TextEdit will work)
-3. On the second line, make sure to change "USER" to your username/homefolder
-4. Save and close
-5. Enjoy!
-
 Customization:
 
 1. Open index.coffee (TextEdit will work)
