@@ -1,5 +1,5 @@
 #CHANGE "USER" TO YOUR USERNAME/HOMEFOLDER!!!
-command: "cd '/Users/USER/Library/Application\ Support/Übersicht/widgets/solar-system.widget/' && ./script.sh"
+command: "cd '/Users/USER/Library/Application\ Support/Übersicht/widgets/solar-system.widget/' && ./script.sh"
 
 #Sets refresh rate in milliseconds
 #Default = 86400000 (1 day)
@@ -109,6 +109,6 @@ update: (output, domEl) ->
     $("##{planets[i]}").css left: "#{x*@scale}px"
 
   for element, size of @sizes
-    $("##{element}").css height: "#{size}px"
+    $("##{element}").css height: "#{size}px", width: "#{size}px"
 
-  $("##{asteroids}").css height: "#{@scaleAsteroids*90}px"
+  $("##{asteroids}").css height: "#{@scaleAsteroids*90}px", width: "#{@scaleAsteroids*90}px" 
